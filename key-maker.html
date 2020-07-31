@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeNames Key Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #907a6c;
+        }
+
+        .key-wrapper-1 {
+            background: #806657;
+            border: 2px solid #5c493a;
+            padding: 21px;
+            width: 324px;
+            border-radius: 20px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .key-board {
+            border: 5px solid #57473a;
+            border-radius: 15px;
+            background: #000;
+            padding: 15px;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            float: left;
+            margin: 3px;
+            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .cell.blue {
+            background: #076892;
+        }
+
+        .cell.blue:after {
+            content: '';
+            display: block;
+            /* position: absolute; */
+            border-radius: 50%;
+            border: 3px solid #59acd4;
+            box-shadow: 0 0 10px #FFF;
+            width: 20px;
+            height: 20px;
+            background: #005685;
+            margin: 12px auto;
+        }
+
+        .cell.red {
+            background: #e21325;
+        }
+
+        .cell.red:after {
+            content: '';
+            display: block;
+            /* position: absolute; */
+            border-radius: 8px;
+            border: 3px solid #ec6d66;
+            box-shadow: 0 0 10px #FFF;
+            width: 20px;
+            height: 20px;
+            background: #b20d13;
+            margin: 12px auto;
+            transform: rotate(45deg);
+        }
+
+        .cell.white {
+            background: #a79877;
+        }
+
+        .cell.Black {
+            background: #000;
+        }
+
+        .cell.Black:after {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 35px;
+            transform: rotate(45deg);
+            background: radial-gradient(#fff, #111);
+            border-radius: 2px;
+            left: 23px;
+            top: 8px;
+            position: absolute;
+        }
+
+        .cell.Black:before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 35px;
+            transform: rotate(-45deg);
+            background: radial-gradient(#fff, #111);
+            border-radius: 2px;
+            left: 23px;
+            top: 8px;
+            position: absolute;
+        }
+
+        .lamp {
+            position: absolute;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
+            z-index: 1;
+        }
+
+        .lamp.red {
+            background: #e21325;
+            background-image: radial-gradient(ellipse, #fba782, #eb2117, #670e08);
+        }
+
+        .lamp.blue {
+            background: #076892;
+            background-image: radial-gradient(ellipse, #82b5fb, #1762eb, #080f67);
+        }
+
+        .lamp.top {
+            top: -2px;
+            width: 50px;
+            height: 16px;
+            left: 155px;
+        }
+
+
+        .lamp.blue.top {
+            box-shadow: 0px 6px 15px #00f;
+        }
+
+        .lamp.red.top {
+            box-shadow: 0px 6px 15px #f00;
+        }
+
+        .lamp.bottom {
+            bottom: -2px;
+            width: 50px;
+            height: 16px;
+            left: 155px;
+        }
+
+
+        .lamp.blue.bottom {
+            box-shadow: 0px -6px 15px #00f;
+        }
+
+        .lamp.red.bottom {
+            box-shadow: 0px -6px 15px #f00;
+        }
+
+        .lamp.side {
+            height: 50px;
+            width: 16px;
+            top: 155px;
+        }
+
+        .lamp.right {
+            right: -2px;
+
+        }
+
+        .lamp.left {
+            left: -2px;
+        }
+
+        .lamp.blue.left {
+            box-shadow: 6px 0px 15px #00f;
+        }
+
+        .lamp.blue.right {
+            box-shadow: -6px 0px 15px #00f;
+        }
+
+
+        .lamp.red.left {
+            box-shadow: 6px 0px 15px #f00;
+        }
+
+        .lamp.red.right {
+            box-shadow: -6px 0px 15px #f00;
+        }
+
+        .bezel {
+            background: #907a6c;
+            position: absolute;
+        }
+
+        .bezel.top {
+            width: 185px;
+            height: 16px;
+            top: -2px;
+            left: 88.5px;
+            border: 2px solid #57473a;
+            border-top: none;
+        }
+
+        .bezel.left {
+            width: 16px;
+            height: 185px;
+            left: -2px;
+            top: 88.5px;
+            border: 2px solid #57473a;
+            border-left: none;
+        }
+
+        .bezel.right {
+            width: 16px;
+            height: 185px;
+            right: -2px;
+            top: 88.5px;
+            border: 2px solid #57473a;
+            border-right: none;
+        }
+
+        .bezel.bottom {
+            width: 185px;
+            height: 16px;
+            bottom: -2px;
+            left: 88.5px;
+            border: 2px solid #57473a;
+            border-bottom: none;
+        }
+
+        .skew {
+            position: absolute;
+            background: #907a6c;
+            border-top: 2px solid #57473a;
+            width: 22px;
+            height: 22px;
+            /* transform: rotate(45deg);
+            left: -12.2px;
+            top: 78px; */
+        }
+
+        .skew.top {
+            top: -13px;
+        }
+
+        .skew.right {
+            right: -12.2px;
+        }
+
+        .skew.left {
+            left: -12.2px;
+        }
+
+        .skew.bottom {
+            bottom: -12.8px;
+        }
+
+        .skew.top-right {
+            right: 78px;
+        }
+
+        .skew.top-left {
+            left: 78.5px;
+        }
+
+        .skew.right-top {
+            top: 78px;
+        }
+
+        .skew.right-bottom {
+            bottom: 72.6px;
+        }
+
+        .skew.left-top {
+            top: 78px;
+        }
+
+        .skew.left-bottom {
+            bottom: 72.6px;
+        }
+
+        .skew.bottom-right {
+            right: 78px;
+        }
+
+        .skew.bottom-left {
+            left: 79.4px;
+        }
+
+        .deg45 {
+            transform: rotate(45deg);
+        }
+
+        .deg135 {
+            transform: rotate(135deg);
+        }
+
+        .deg225 {
+            transform: rotate(225deg);
+        }
+
+        .deg315 {
+            transform: rotate(315deg);
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 240px;
+            margin: 0 auto;
+        }
+
+        input[name=str] {
+            margin: 0 auto;
+            display: block;
+            width: 240px;
+            font-family: 'Inconsolata', monospace;
+            text-align: center;
+            background: #d0beb3;
+            border: 2px solid #57473a;
+            border-radius: 15px;
+            color: #31271f;
+            padding: 5px 0;
+        }
+
+        .btn {
+            cursor: pointer;
+            position: absolute;
+            width: 25px;
+            height: 24px;
+            background-color: #806657;
+            border: 2px solid #5c493a;
+            top: 0;
+            text-align: center;
+            color: #352a20;
+        }
+
+        .btn.reset {
+            border-radius: 0 50% 50% 0;
+            right: -5px;
+        }
+
+        .btn.copy {
+            left: 0;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .btn>i {
+            padding: 3px;
+            position: relative;
+        }
+
+        .btn>i.fa-copy {
+            left: 3px;
+        }
+
+        .btn>i.fa-redo {
+            right: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="key-wrapper-1">
+        <div class="key-board clearfix" id="key-board">
+        </div>
+        <div class="lamp top"></div>
+        <div class="lamp right side"></div>
+        <div class="lamp left side"></div>
+        <div class="lamp bottom"></div>
+        <div class="bezel top"></div>
+        <div class="bezel right"></div>
+        <div class="bezel left"></div>
+        <div class="bezel bottom"></div>
+
+        <div class="skew top top-right deg135"></div>
+        <div class="skew top top-left deg225"></div>
+        <div class="skew right right-top deg315"></div>
+        <div class="skew right right-bottom deg225"></div>
+        <div class="skew left left-top deg45"></div>
+        <div class="skew left left-bottom deg135"></div>
+        <div class="skew bottom bottom-right deg45"></div>
+        <div class="skew bottom bottom-left deg315"></div>
+    </div>
+    <div class="input-wrapper">
+        <div class="btn copy"><i class="fa fa-copy"></i></div>
+        <input type="text" name="str" />
+        <div class="btn reset"><i class="fa fa-redo" onclick="generateKey()"></i></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (event) {
+            var strQuery = window.location.search;
+            if (strQuery == '' || strQuery == undefined) {
+                generateKey();
+                return;
+            }
+            strQuery = strQuery.substr(1);
+            if (validateKey(strQuery))
+                generateKey(strQuery);
+            else
+                generateKey();
+        });
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+            return array;
+        }
+
+        function generateKey(keys) {
+            var cells = [];
+            if (keys == undefined || keys == '') {
+                cells = ['blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue',
+                    'red', 'red', 'red', 'red', 'red', 'red', 'red', 'red',
+                    'white', 'white', 'white', 'white', 'white', 'white', 'white', 'Black'];
+                var starter = Math.random() < 0.5 ? 'red' : 'blue';
+                //var otherColor = starter == 'red' ? 'blue' : 'red';
+                cells.push(starter);
+                cells = shuffle(cells);
+            } else
+                Array.from(keys).forEach(k => {
+                    switch (k) {
+                        case 'b':
+                            cells.push('blue');
+                            break;
+                        case 'r':
+                            cells.push('red');
+                            break;
+                        case 'B':
+                            cells.push('Black');
+                            break;
+                        case 'w':
+                            cells.push('white');
+                            break;
+                        default:
+                            break;
+                    }
+                })
+            drawCells(cells);
+        }
+
+        function drawCells(cells) {
+            var keyBoard = document.getElementById('key-board');
+            keyBoard.innerHTML = '';
+            var str = '';
+            var blueCount = 0;
+            cells.forEach(cell => {
+                if (cell == 'blue') blueCount++;
+                var element = document.createElement("div");
+                element.setAttribute("class", `cell ${cell}`);
+                keyBoard.appendChild(element);
+                str += cell.charAt(0);
+            });
+            var starter = blueCount == 9 ? 'blue' : 'red';
+            var otherColor = starter == 'blue' ? 'red' : 'blue';
+            console.log(blueCount, starter);
+            var lamps = Array.from(document.getElementsByClassName('lamp'));
+            lamps.forEach(e => {
+                e.classList.remove(otherColor);
+                e.classList.add(starter);
+            });
+            var input = document.getElementsByName('str')[0];
+            input.value = str;
+            if (document.location.search != '?' + str)
+                document.location.search = '?' + str;
+        }
+
+        function validateKey(key) {
+            if (key == '' || key == undefined) return false;
+            if (key.length != 25) return false;
+            blueCount = 0;
+            redCount = 0;
+            whiteCount = 0;
+            blackCount = 0;
+            for (let i = 0; i < key.length; i++) {
+                const cell = key[i];
+                switch (cell) {
+                    case 'b': blueCount++; break;
+                    case 'r': redCount++; break;
+                    case 'w': whiteCount++; break;
+                    case 'B': blackCount++; break;
+                    default: return false;
+                }
+            }
+            if (blueCount + redCount != 17 && Math.abs(blueCount - redCount) != 1) return false;
+            if (whiteCount != 7) return false;
+            if (blackCount != 1) return false;
+            return true;
+        }
+    </script>
+</body>
+
+</html>
